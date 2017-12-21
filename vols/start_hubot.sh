@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset 
+declare -r TOOLS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"   
 
 export HUBOT_GITHUB_TOKEN="${CFG_GITHUB_HUBOT_TOKEN}"
 #export HUBOT_GITHUB_WEBHOOK_SECRET=- Optional, if you are using webhooks and have a secret set this for additional security checks on payload delivery
@@ -11,7 +14,7 @@ export HUBOT_BOT_NAME=hubot
 
 
 
-cat << EOF > /home/bobb/prod/hubot/hubot.conf
+cat << EOF > ${TOOLS}/hubot.conf
 ## Bot Settings
 export HUBOT_NAME="${CFG_GITHUB_HUBOT_TOKEN}" # what hubot listens to
 ## Slack adapter settings
