@@ -1,0 +1,5 @@
+.git*
+.lfs*
+README.*
+vols/*
+start_hubot.sh
