@@ -1,5 +1,5 @@
-.git*
+README.md
+docker-compose.yml
 .lfs*
-README.*
+.git*
 vols/*
-start_hubot.sh
