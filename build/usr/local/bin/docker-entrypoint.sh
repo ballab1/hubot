@@ -4,17 +4,21 @@
 set -o errexit
 set -o nounset 
 #set -o verbose
+#env
 
+
+#########################################################################################################
 function verifyEnvironment()
 {
     ## Slack adapter settings
-    export HUBOT_NAME="${HUBOT_NAME:?'Envorinment variable HUBOT_NAME must be defined'}"        # what hubot listens to
+    export HUBOT_BOT_NAME="${HUBOT_BOT_NAME:?'Envorinment variable HUBOT_BOT_NAME must be defined'}"            # what hubot listens to
     export HUBOT_SLACK_TOKEN="${HUBOT_SLACK_TOKEN?:'Envorinment variable HUBOT_SLACK_TOKEN must be defined'}"   # Credentials
 
     export HUBOT_HOME="${HUBOT_HOME:-/usr/local/hubot}"
     export PATH="${HUBOT_HOME}/node_modules/.bin:${HUBOT_HOME}/node_modules/hubot/node_modules/.bin:${PATH}"
 }
 
+#########################################################################################################
 function loadUserScripts()
 {
     declare -a hubot_scripts="hubot-diagnostics hubot-help hubot-redis-brain hubot-rules hubot-shipit hubot-reload-scripts"
@@ -32,6 +36,12 @@ function loadUserScripts()
 }
 
 
+#########################################################################################################
+#
+#   MAIN
+#
+#########################################################################################################
+
 cd "${HUBOT_HOME}"
 if [ "$1" = 'hubot' ]; then       # regular app start
 
@@ -45,6 +55,7 @@ if [ "$1" = 'hubot' ]; then       # regular app start
     ln -s /etc/supervisor.d/supervisord.regular /etc/supervisor.d/supervisord.ini
     exec supervisord --nodaemon --configuration="/etc/supervisord.conf" --loglevel=info
 
+
 elif [ "$1" = 'hubot_debug' ]; then     # debugging line: allows access from chrome
 
     shift
@@ -55,7 +66,8 @@ elif [ "$1" = 'hubot_debug' ]; then     # debugging line: allows access from chr
 #    exec --inspect node_modules/.bin/hubot --name "Hubot" "$@"
 #    node --inspect app.js
     ln -s /etc/supervisor.d/supervisord.debug /etc/supervisor.d/supervisord.ini
-    exec supervisord --nodaemon --configuration="/etc/supervisord.conf" --loglevel=info
+    exec supervisord --nodaemon --configuration="/etc/supervisord.conf" --loglevel=debug
+
 
 else
     exec $@
