@@ -201,7 +201,7 @@ trap catch_pipe PIPE
 set -o verbose
 
 header
-declare -r HUBOT_USER="${HUBOT_USER:?'Envorinment variable HUBOT_USER must be defined'}"
+declare -r HUBOT_USER="${HUBOT_USER:?'Environment variable HUBOT_USER must be defined'}"
 installAlpinePackages
 createUserAndGroup "${HUBOT_USER}" "${hubot_uid}" "${HUBOT_GROUP}" "${hubot_gid}" "${HUBOT_HOME}" /bin/bash
 installTimezone
