@@ -1,0 +1,16 @@
+# Hubot
+
+declare -A hubot=()
+
+declare bht_uid=${hubot_uid:-2223}
+declare bht_gid=${hubot_gid:-2223}
+
+hubot['user']=${HUBOT_USER:-hubot}
+hubot['uid']=${bht_uid:-$(getent passwd "${hubot['user']}" | cut -d: -f3)}
+hubot['group']=${HUBOT_GROUP:-hubot}
+hubot['gid']=${bht_gid:-$(getent group "${hubot['user']}" | cut -d: -f3)}
+hubot['shell']=/bin/bash
+hubot['home']="${HUBOT_HOME:-/usr/local/hubot}"
+
+#directories
+export HUBOT_HOME="${hubot['home']}"
