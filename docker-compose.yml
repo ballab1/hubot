@@ -3,9 +3,14 @@ version: '3.5'
 services:
     hubot:
         build:
-            context: .
             args:
+                CONTAINER_VERSION: 1.0.0
+                FROM_BASE: base_container:20180214
                 HUBOT_USER: 'hubot'
+            context: .
+            cache_from:
+                - base_container:20180214
+                - alpine:3.6
         container_name: hubot
         environment:
             HUBOT_BOT_NAME: hubot
