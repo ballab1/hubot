@@ -1,15 +1,17 @@
 #!/bin/bash
 
-source "${TOOLS}/03.users_groups/01.hubot"
+declare config_entry=hubot_user
 
-function installUserModeFiles()
-{
+if [ $# -eq 0 ]; then
+    source "${TOOLS}/03.users_groups/01.hubot"
+    printf "\nprepare and install hubot specific content for %s\n" "${hubot['user']}"
+    mkdir -p "${hubot['home']}"
+    chown "${hubot['user']}:${hubot['group']}" "${hubot['home']}"
+    sudo --preserve-env --login --user=${hubot['user']} --set-home "$0" "$config_entry"
+
+elif [ "$1" = "$config_entry" ]; then
+    cd ~/
+    pwd
     npm install coffee-script@1.12.6 hubot-slack --save
     yo hubot --owner="Dell EMC" --license="MIT" --name="Hubot" --description="fun stuff" --adapter=slack --defaults
-}
-
-printf "\nprepare and install hubot specific content for %s\n" "${hubot['user']}"
-
-mkdir -p "${hubot['home']}"
-cd "${hubot['home']}"
-sudo --login --user=${hubot['user']} installUserModeFiles
+fi
