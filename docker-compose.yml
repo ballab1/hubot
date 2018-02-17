@@ -1,32 +1,35 @@
-version: '3.1'
+version: '3.5'
 
 services:
     hubot:
         build:
-            context: ../hubot
             args:
-                TZ: "America/New_York" 
+                CONTAINER_VERSION: 1.0.0
+                FROM_BASE: base_container:20180214
                 HUBOT_USER: 'hubot'
-        image: hubot:20171226
+            context: .
+            cache_from:
+                - base_container:20180214
+                - alpine:3.6
         container_name: hubot
-        hostname: hubot
-        restart: unless-stopped
         environment:
-            TZ: "America/New_York" 
             HUBOT_BOT_NAME: hubot
             HUBOT_GITHUB_REPOS_MAP: '{"git":["ballab1/alpinefull","ballab1/bin","ballab1/DBMS-backup","ballab1/hubot","ballab1/jenkins","ballab1/jenkins-files","ballab1/kafka-i386","ballab1/mysql","ballab1/nagios","ballab1/nginx","ballab1/phpmyadmin","ballab1/prod","ballab1/update-check","ballab1/UptimePipeline","ballab1/webhooks","ballab1/zenphoto"]}'
             HUBOT_GITHUB_TOKEN: ${CFG_GITHUB_HUBOT_TOKEN}
 #            HUBOT_GITHUB_WEBHOOK_SECRET: ${CFG_HUBOT_GITHUB_WEBHOOK_SECRET}
             HUBOT_SLACK_TOKEN: ${CFG_SLACK_HUBOT_TOKEN}
-        volumes:
-            - ../hubot/vols/redis:/var/lib/redis
-            - ../hubot/vols/log:/var/log
-            - ../hubot/vols/conf:/opt/hubot
-        ports:
-            - 5858:5858
-            - 8081:8080
-            - 8123:8123
+        hostname: hubot
+        image: hubot:20180217
         logging:
             driver: "json-file"
             options:
                 max-size: "10m"
+        ports:
+            - 5858:5858
+            - 8081:8080
+            - 8123:8123
+        restart: unless-stopped
+        volumes:
+            - ../hubot/vols/redis:/var/lib/redis
+            - ../hubot/vols/log:/var/log
+            - ../hubot/vols/conf:/opt/hubot
