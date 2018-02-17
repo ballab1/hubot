@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source "${TOOLS}/03.users_groups/01.hubot"
+
+printf "\nprepare and install NodeJS stuff\n"
+
+declare -r NPM_PKGS="coffee-script yo generator-hubot node-inspector"
+
+mkdir -p "${hubot['home']}"
+cd "${hubot['home']}"
+
+npm install --global $NPM_PKGS
