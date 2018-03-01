@@ -4,13 +4,16 @@ services:
     hubot:
         build:
             args:
+                CONTAINER_NAME: hubot
                 CONTAINER_VERSION: 1.0.1
+                DEBUG_TRACE: 0
                 FROM_BASE: base_container:20180217
-                HUBOT_USER: 'hubot'
+                HUBOT_USER: hubot
             context: .
             cache_from:
                 - base_container:20180217
                 - alpine:3.6
+            dockerfile: Dockerfile
         container_name: hubot
         environment:
             HUBOT_BOT_NAME: hubot
@@ -21,15 +24,15 @@ services:
         hostname: hubot
         image: hubot:20180217
         logging:
-            driver: "json-file"
+            driver: json-file
             options:
-                max-size: "10m"
+                max-size: 10m
         ports:
             - 5858:5858
             - 8081:8080
             - 8123:8123
-        restart: unless-stopped
+#        restart: unless-stopped
         volumes:
-            - ../hubot/vols/redis:/var/lib/redis
-            - ../hubot/vols/log:/var/log
-            - ../hubot/vols/conf:/opt/hubot
+            - ./vols/redis:/var/lib/redis
+            - ./vols/log:/var/log
+            - ./vols/conf:/opt/hubot

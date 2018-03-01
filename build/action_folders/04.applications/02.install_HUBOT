@@ -3,7 +3,7 @@
 declare config_entry=hubot_user
 
 if [ $# -eq 0 ]; then
-    source "${TOOLS}/03.users_groups/01.hubot"
+    source "${CBF['action']}/02.users_groups/01.hubot"
     printf "\nprepare and install hubot specific content for %s\n" "${hubot['user']}"
     mkdir -p "${hubot['home']}"
     chown "${hubot['user']}:${hubot['group']}" "${hubot['home']}"

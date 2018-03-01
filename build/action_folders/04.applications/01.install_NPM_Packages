@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "${TOOLS}/03.users_groups/01.hubot"
+source "${CBF['action']}/02.users_groups/01.hubot"
 
 printf "\nprepare and install NodeJS stuff\n"
 
