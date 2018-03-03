@@ -22,7 +22,7 @@ COPY build /tmp/
 RUN set -o verbose \
     && chmod u+rwx /tmp/build.sh \
     && /tmp/build.sh "$CONTAINER_NAME"
-RUN [[ $DEBUG_TRACE == 0 ]] && rm -rf /tmp/* 
+RUN [[ $DEBUG_TRACE != 0 ]] || rm -rf /tmp/* 
 
 
 # hubot app port: Exposing node-inspector
