@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "${CBF['action']}/02.users_groups/01.hubot"
-
 printf "\nprepare and install NodeJS stuff\n"
 
 declare -r NPM_PKGS="coffee-script yo generator-hubot node-inspector"
