@@ -7,10 +7,11 @@ services:
                 CONTAINER_NAME: hubot
                 CONTAINER_VERSION: 1.0.6
                 DEBUG_TRACE: 0
-                FROM_BASE: base_container:20180314
+                FROM_BASE: supervisord:20180314
                 HUBOT_USER: hubot
             context: .
             cache_from:
+                - supervisord:20180314
                 - base_container:20180314
                 - alpine:3.6
             dockerfile: Dockerfile
