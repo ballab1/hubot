@@ -1,0 +1,6 @@
+[program:hubot]
+command=/usr/local/hubot/bin/hubot --adapter slack
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+autorestart=true
