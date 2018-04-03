@@ -1,3 +1,8 @@
 # build Packages
 
-apk add --no-cache --virtual .buildDepedencies file gnutls-utils nodejs-dev shadow build-base gcc g++ gcc-objc libtool libc6-compat make expat expat-dev gnupg tar git
+if [ "${CBF['os_id']}" = 'alpine' ]; then
+    declare PKGS='file gnutls-utils nodejs-dev build-base g++ gcc-objc libtool libc6-compat make expat-dev gnupg tar git'
+    package.checkIfInstalled "$PKGS"
+    apk add --no-cache --virtual .buildDepedencies $PKGS
+fi
+

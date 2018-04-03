@@ -1,3 +1,7 @@
 # core Packages
 
-apk add --no-cache imagemagick nodejs nodejs-npm sudo tzdata
+if [ "${CBF['os_id']}" = 'alpine' ]; then
+    declare PKGS='imagemagick nodejs nodejs-npm sudo tzdata'
+    package.checkIfInstalled "$PKGS"
+    apk add --no-cache $PKGS
+fi
