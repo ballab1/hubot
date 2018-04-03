@@ -1,3 +1,7 @@
 # hubot packages
 
-apk add --no-cache supervisor redis python wget zip curl
+if [ "${CBF['os_id']}" = 'alpine' ]; then
+    declare PKGS='redis wget zip curl'
+    package.checkIfInstalled "$PKGS"
+    apk add --no-cache $PKGS
+fi
