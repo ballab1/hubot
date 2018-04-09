@@ -4,6 +4,7 @@ cd /tmp
 declare cbf_dir=/tmp/container_build_framework
 
 if [ ! -d "$cbf_dir" ]; then
+    echo "Downloading CBF framework: ${CBF_VERSION}"
     # since no CBF directory located, attempt to download CBF based on specified verion
     declare CBF_URL="https://github.com/ballab1/container_build_framework/archive/${CBF_VERSION}.tar.gz"         
     wget --no-check-certificate --quiet --output-document=- "$CBF_URL" | tar -xz
@@ -15,4 +16,5 @@ if [ -z "$cbf_dir" ] || [ ! -d "$cbf_dir" ]; then
 fi
 
 echo "loading framework from ${cbf_dir}"
-source "${cbf_dir}/bin/build.sh" "$@"
+chmod 755 "${cbf_dir}/bin/build.sh"
+exec "${cbf_dir}/bin/build.sh" "$@"

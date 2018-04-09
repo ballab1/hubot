@@ -1,7 +1,21 @@
 #!/bin/bash
 
 #########################################################################################################
-function loadUserScripts()
+function hubot.UID()
+{
+    lib.lookupId passwd hubot 2223
+}
+export -f hubot.UID
+
+#########################################################################################################
+function hubot.GID()
+{
+    lib.lookupId group hubot 2223
+}
+export -f hubot.GID
+
+#########################################################################################################
+function hubot.loadUserScripts()
 {
     declare -a hubot_scripts="hubot-diagnostics hubot-help hubot-redis-brain hubot-rules hubot-shipit hubot-reload-scripts"
 
@@ -17,3 +31,4 @@ function loadUserScripts()
     done
     npm install  # Install any dependencies missed by the hubot generate
 }
+export -f hubot.loadUserScripts
