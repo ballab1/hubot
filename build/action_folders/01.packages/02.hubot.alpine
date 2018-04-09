@@ -1,0 +1,6 @@
+# hubot packages
+
+PKGS='curl \
+      redis \
+      wget \
+      zip'
