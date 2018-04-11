@@ -1,7 +1,7 @@
 # build Packages
 
-OPTS='--virtual .buildDepedencies'
-PKGS='build-base \
+OPTS="--virtual .buildDepedencies"
+PKGS="build-base \
       expat-dev \
       file \
       git \
@@ -13,5 +13,5 @@ PKGS='build-base \
       libc6-compat \
       libtool \
       make \
-      tar'
+      tar"
 

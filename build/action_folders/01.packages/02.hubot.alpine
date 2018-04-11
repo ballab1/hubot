@@ -1,6 +1,6 @@
 # hubot packages
 
-PKGS='curl \
+PKGS="curl \
       redis \
       wget \
-      zip'
+      zip"

@@ -1,7 +1,7 @@
 # core Packages
 
-PKGS='imagemagick \
+PKGS="imagemagick \
       nodejs \
       nodejs-npm \
       sudo \
-      tzdata'
+      tzdata"
