@@ -7,7 +7,6 @@ services:
                 CBF_VERSION: ${CBF_VERSION:-dev}
                 CONTAINER_NAME: hubot
                 CONTAINER_VERSION: 1.0.6
-                DEBUG_TRACE: 0
                 FROM_BASE: supervisord:latest
                 HUBOT_USER: hubot
             context: .
@@ -18,6 +17,7 @@ services:
             dockerfile: Dockerfile
         container_name: hubot
         environment:
+            DEBUG_TRACE: ${DEBUG_TRACE:-0}
             HUBOT_BOT_NAME: hubot
             HUBOT_GITHUB_REPOS_MAP: '{"git":["ballab1/alpinefull","ballab1/bin","ballab1/DBMS-backup","ballab1/hubot","ballab1/jenkins","ballab1/jenkins-files","ballab1/kafka-i386","ballab1/mysql","ballab1/nagios","ballab1/nginx","ballab1/phpmyadmin","ballab1/prod","ballab1/update-check","ballab1/UptimePipeline","ballab1/webhooks","ballab1/zenphoto"]}'
             HUBOT_GITHUB_TOKEN: ${CFG_GITHUB_HUBOT_TOKEN}
