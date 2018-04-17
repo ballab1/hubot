@@ -2,10 +2,10 @@
 
 declare -A hubot=(
     ['user']=${HUBOT_USER:-hubot}
-    ['uid']=${HUBOT_UID:-$(getent passwd hubot | cut -d: -f3)}
+    ['uid']="$HUBOT_UID"
     ['group']=${HUBOT_GROUP:-hubot}
-    ['gid']=${HUBOT_GID:-$(getent group hubot| cut -d: -f3)}
-    ['shell']=/sbin/nologin
+    ['gid']="$HUBOT_GID"
+    ['shell']=/bin/bash
     ['home']="${HUBOT_HOME:-/usr/local/hubot}"
 )
 : ${hubot['uid']:=2223}

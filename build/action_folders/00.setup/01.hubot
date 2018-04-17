@@ -1,5 +1,12 @@
 #!/bin/bash
 
+declare env_hubot_options=$(set +o)
+set +o nounset 
+: ${HUBOT_UID:=$(getent passwd hubot | cut -d: -f3)}
+: ${HUBOT_GID:=$(getent group hubot| cut -d: -f3)}
+eval "$env_hubot_options" 
+unset env_hubot_options
+
 declare -ar env_hubot=(
     'HUBOT_USER="${HUBOT_USER:-hubot}"'
     'HUBOT_UID="${HUBOT_UID:-2223}"'
@@ -9,3 +16,5 @@ declare -ar env_hubot=(
 )
 
 lib.updateRuntimeEnvironment "${env_hubot[*]}" 
+
+lib.copyFileToRuntime 'LIB' 'hubot.bashlib'
