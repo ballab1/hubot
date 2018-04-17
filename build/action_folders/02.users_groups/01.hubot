@@ -2,11 +2,9 @@
 
 declare -A hubot=(
     ['user']=${HUBOT_USER:-hubot}
-    ['uid']="$HUBOT_UID"
+    ['uid']="${HUBOT_UID:-$(hubot.UID)}"
     ['group']=${HUBOT_GROUP:-hubot}
-    ['gid']="$HUBOT_GID"
+    ['gid']="${HUBOT_GID:-$(hubot.GID)}"
     ['shell']=/bin/bash
     ['home']="${HUBOT_HOME:-/usr/local/hubot}"
 )
-: ${hubot['uid']:=2223}
-: ${hubot['gid']:=2223}
