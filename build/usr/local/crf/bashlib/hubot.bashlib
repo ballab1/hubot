@@ -5,14 +5,14 @@ function hubot.UID()
 {
     lib.lookupId passwd hubot 2223
 }
-export hubot.UID
+export -f hubot.UID
 
 #########################################################################################################
 function hubot.GID()
 {
     lib.lookupId group hubot 2223
 }
-export hubot.GID
+export -f hubot.GID
 
 #########################################################################################################
 function hubot.loadUserScripts()
@@ -31,4 +31,4 @@ function hubot.loadUserScripts()
     done
     npm install  # Install any dependencies missed by the hubot generate
 }
-export hubot.loadUserScripts
+export -f hubot.loadUserScripts
