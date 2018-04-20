@@ -1,14 +1,17 @@
 #!/bin/bash
 
-declare script_arg=hubot_user_mode
+declare config_entry=hubot_user
+declare this_script="${BASH_SOURCE[0]}"
 
 if [ $# -eq 0 ]; then
+    source "$(cbf.ACTION)/02.users_groups/01.hubot"
     printf "\nprepare and install hubot specific content for %s\n" "${hubot['user']}"
     mkdir -p "${hubot['home']}"
     chown "${hubot['user']}:${hubot['group']}" "${hubot['home']}"
-    sudo --preserve-env --login --user=${hubot['user']} --set-home "$0" "$script_arg"
+    chmod 755 "$this_script"
+    sudo --preserve-env --login --user=${hubot['user']} --set-home "$this_script" "$config_entry"
 
-elif [ "$1" = "$script_arg" ]; then
+elif [ "$1" = "$config_entry" ]; then
     cd ~/
     pwd
     npm install coffee-script@1.12.6 hubot-slack --save
