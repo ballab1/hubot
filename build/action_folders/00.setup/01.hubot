@@ -8,6 +8,6 @@ declare -ar env_hubot=(
     'HUBOT_HOME="${HUBOT_HOME:-/usr/local/hubot}"'
 )
 
-lib.updateRuntimeEnvironment "${env_hubot[*]}" 
+crf.updateRuntimeEnvironment "${env_hubot[*]}" 
 
-lib.copyFileToRuntime 'LIB' 'hubot.bashlib'
+crf.copyFileToRuntime 'LIB' 'hubot.bashlib'
