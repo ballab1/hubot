@@ -1,0 +1,7 @@
+# core Packages
+
+declare -a PKGS=( imagemagick
+                  nodejs
+                  nodejs-npm
+                  sudo
+                  tzdata )

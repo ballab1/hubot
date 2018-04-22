@@ -1,0 +1,13 @@
+#!/bin/bash
+
+declare -ar env_hubot=(
+    'HUBOT_USER="${HUBOT_USER:-hubot}"'
+    'HUBOT_UID="${HUBOT_UID:-$(hubot.UID)}"'
+    'HUBOT_GROUP="${HUBOT_GROUP:-hubot}"'
+    'HUBOT_GID="${HUBOT_GID:-$(hubot.GID)}"'
+    'HUBOT_HOME="${HUBOT_HOME:-/usr/local/hubot}"'
+)
+
+lib.updateRuntimeEnvironment "${env_hubot[*]}" 
+
+lib.copyFileToRuntime 'LIB' 'hubot.bashlib'
