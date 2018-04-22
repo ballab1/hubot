@@ -1,7 +1,0 @@
-# hubot packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    declare PKGS='redis wget zip curl'
-    package.checkIfInstalled "$PKGS"
-    apk add --no-cache $PKGS
-fi
