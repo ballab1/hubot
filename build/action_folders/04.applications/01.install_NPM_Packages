@@ -2,9 +2,12 @@
 
 printf "\nprepare and install NodeJS stuff\n"
 
-declare -r NPM_PKGS="coffee-script yo generator-hubot node-inspector"
-
 mkdir -p "${hubot['home']}"
 cd "${hubot['home']}"
 
-npm install --global $NPM_PKGS
+npm install --global coffee-script yo generator-hubot node-inspector
+if [ -e npm-debug.log ]; then
+    echo '---npm-debug.log-------------------------------------------------------------------'
+    cat npm-debug.log
+    echo '-----------------------------------------------------------------------------------'
+fi
