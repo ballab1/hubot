@@ -1,0 +1,6 @@
+# hubot packages
+
+declare -a PKGS=( curl
+                  redis
+                  wget
+                  zip )

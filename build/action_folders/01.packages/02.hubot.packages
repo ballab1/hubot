@@ -1,3 +1,0 @@
-# hubot packages
-
-apk add --no-cache supervisor redis python wget zip curl

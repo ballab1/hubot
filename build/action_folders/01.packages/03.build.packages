@@ -1,3 +1,0 @@
-# build Packages
-
-apk add --no-cache --virtual .buildDepedencies file gnutls-utils nodejs-dev shadow build-base gcc g++ gcc-objc libtool libc6-compat make expat expat-dev gnupg tar git

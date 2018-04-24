@@ -1,3 +1,0 @@
-# core Packages
-
-apk add --no-cache imagemagick nodejs nodejs-npm sudo tzdata
