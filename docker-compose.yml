@@ -7,12 +7,12 @@ services:
                 CBF_VERSION: ${CBF_VERSION:-dev}
                 CONTAINER_NAME: hubot
                 CONTAINER_VERSION: 1.0.6
-                FROM_BASE: supervisord:latest
+                FROM_BASE: supervisord:${CONTAINER_TAG:-latest}
                 HUBOT_USER: hubot
             context: .
             cache_from:
-                - supervisord:latest
-                - base_container:latest
+                - supervisord:${CONTAINER_TAG:-latest}
+                - base_container:${CONTAINER_TAG:-latest}
                 - alpine:3.6
             dockerfile: Dockerfile
         container_name: hubot
@@ -24,7 +24,7 @@ services:
 #            HUBOT_GITHUB_WEBHOOK_SECRET: ${CFG_HUBOT_GITHUB_WEBHOOK_SECRET}
             HUBOT_SLACK_TOKEN: ${CFG_SLACK_HUBOT_TOKEN}
         hostname: hubot
-        image: hubot:latest
+        image: hubot:${CONTAINER_TAG:-latest}
         logging:
             driver: json-file
             options:
