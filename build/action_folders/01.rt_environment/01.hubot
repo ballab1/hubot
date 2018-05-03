@@ -1,0 +1,18 @@
+#!/bin/bash
+
+declare -ar env_hubot=(
+    'HUBOT_USER="${HUBOT_USER:-hubot}"'
+    'HUBOT_UID="${HUBOT_UID:-$(hubot.UID "$HUBOT_USER")}"'
+    'HUBOT_GROUP="${HUBOT_GROUP:-hubot}"'
+    'HUBOT_GID="${HUBOT_GID:-$(hubot.GID "$HUBOT_GROUP")}"'
+    'HUBOT_HOME="${HUBOT_HOME:-/usr/local/hubot}"'
+    'EXTERNAL_SCRIPTS="${HUBOT_HOME}/external-scripts.json"'
+    'PATH="${HUBOT_HOME}/node_modules/.bin:${HUBOT_HOME}/node_modules/hubot/node_modules/.bin:${PATH}"'
+    'WORKDIR=${HUBOT_HOME}'
+    'USER="${HUBOT_UID}"'
+)
+
+#remove WORKDIR so it comes after HUBOT
+crf.removeFromRuntimeEnvironment 'USER'
+crf.removeFromRuntimeEnvironment 'WORKDIR'
+crf.updateRuntimeEnvironment "${env_hubot[@]}" 
