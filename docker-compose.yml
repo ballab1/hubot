@@ -6,7 +6,6 @@ services:
             args:
                 CBF_VERSION: "${CBF_VERSION:-}"
                 CONTAINER_NAME: hubot
-                CONTAINER_VERSION: ${CONTAINER_VERSION:-3.0.0}
                 FROM_BASE: ${DOCKER_REGISTRY:-}supervisord:${CONTAINER_TAG:-latest}
                 HUBOT_USER: hubot
             cache_from:
@@ -27,6 +26,14 @@ services:
             SUPERVISORD_USER: $CFG_USER
         hostname: hubot
         image: ${DOCKER_REGISTRY:-}hubot:${CONTAINER_TAG:-latest}
+        labels:
+            container.fingerprint: $CONTAINER_FINGERPRINT
+            container.git.branch: $CONTAINER_GIT_BRANCH
+            container.git.commit: $CONTAINER_GIT_COMMIT
+            container.git.url: $CONTAINER_GIT_URL
+            container.origin: $CONTAINER_ORIGIN
+            container.original.name: hubot
+            container.version: ${CONTAINER_VERSION:-3.0.0}
         logging:
             driver: json-file
             options:
