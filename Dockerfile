@@ -15,7 +15,7 @@ ENV DEBUG_TRACE=0
 
 
 ARG HUBOT_USER=hubot
-ENV HUBOT_HOME=/usr/local/hubot
+ARG HUBOT_HOME=/usr/local/hubot
 
 
 # build content
