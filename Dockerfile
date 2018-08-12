@@ -4,7 +4,7 @@ FROM $FROM_BASE
 # name and version of this docker image
 ARG CONTAINER_NAME=hubot
 # Specify CBF version to use with our configuration and customizations
-ARG CBF_VERSION="${CBF_VERSION}"
+ARG CBF_VERSION
 
 # include our project files
 COPY build Dockerfile /tmp/
@@ -15,7 +15,7 @@ ENV DEBUG_TRACE=0
 
 
 ARG HUBOT_USER=hubot
-ENV HUBOT_HOME=/usr/local/hubot
+ARG HUBOT_HOME=/usr/local/hubot
 
 
 # build content
