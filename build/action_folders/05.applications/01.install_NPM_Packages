@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "\n    %s\n" 'prepare and install NodeJS stuff'
+printf '\n    %s\n' 'prepare and install NodeJS stuff'
 
 #declare -ra NPM_PKGS=( yo generator-hubot node-inspector )
 declare -ra NPM_PKGS=( yo generator-hubot )

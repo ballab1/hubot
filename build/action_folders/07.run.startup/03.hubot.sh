@@ -2,7 +2,9 @@
 
 # HUBOT_BOT_NAME:     what hubot listens to
 : HUBOT_BOT_NAME="${HUBOT_BOT_NAME:?'Envorinment variable HUBOT_BOT_NAME must be defined'}"
+
 # HUBOT_SLACK_TOKEN:  Credentials
+[ ${HUBOT_SLACK_TOKEN:-} ] || lib.file_env 'HUBOT_SLACK_TOKEN'
 : HUBOT_SLACK_TOKEN="${HUBOT_SLACK_TOKEN?:'Envorinment variable HUBOT_SLACK_TOKEN must be defined'}"
 
 cd /etc/supervisor.d/
