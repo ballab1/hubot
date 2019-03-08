@@ -1,0 +1,47 @@
+#!/bin/bash
+#############################################################################
+
+function hubot.UID()
+{
+    local -r user_name="${1:-hubot-data}"
+    local -r default_uid=${2:-2223}
+    
+    lib.lookupId "$user_name" 'passwd' "$default_uid"
+}
+export -f hubot.UID
+
+#############################################################################
+function hubot.GID()
+{
+    local -r group_name="${1:-hubot-data}"
+    local -r default_gid=${2:-2223}
+    
+    lib.lookupId "$group_name" 'group' "$default_gid"
+}
+export -f hubot.GID
+
+#########################################################################################################
+function hubot.hasUIDchanged()
+{
+    [ "$(unset HUBOT_UID; crf.runtimeProperty 'HUBOT_UID' || :)" != "$HUBOT_UID" ]
+}
+export -f hubot.hasUIDchanged
+
+#############################################################################
+function hubot.loadUserScripts()
+{
+    declare -a hubot_scripts=( hubot-diagnostics hubot-help hubot-redis-brain hubot-rules hubot-shipit hubot-reload-scripts )
+
+    cd "${HUBOT_HOME}"
+
+    # Utilize external-scripts.json to control which scripts are installed.
+    [[ -e /opt/hubot/external-scripts.json ]] && cp /opt/hubot/external-scripts.json "$EXTERNAL_SCRIPTS"
+    hubot_scripts=$(awk -F'"' '{ if (NF > 3) {print $2 "@" $4} else if (NF == 3) {print $2} }' "$EXTERNAL_SCRIPTS")
+    
+    # load extended scripts 
+    for script in "${hubot_scripts[@]}"; do
+        npm install $script --save
+    done
+    npm install  # Install any dependencies missed by the hubot generate
+}
+export -f hubot.loadUserScripts

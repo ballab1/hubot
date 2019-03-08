@@ -1,0 +1,45 @@
+#!/bin/bash
+
+declare config_entry=hubot_user
+declare this_script="${BASH_SOURCE[0]}"
+declare info="$(mktemp)"
+
+
+if [ $# -eq 0 ]; then
+
+    # prevent:  "Error: EACCES, permission denied '/root/.config/configstore/insight-yo.json'"
+    #           https://github.com/keystonejs/keystone/issues/1566
+    mkdir -p /root/.config/configstore
+    chmod g+rwx /root /root/.config /root/.config/configstore
+#    touch /root/.config/configstore/insight-yo.json
+#    chmod g+rwx /root/.config/configstore/insight-yo.json
+
+    lib.getUserInfo "$HUBOT_USER" 'extended' > "$info"
+
+    # running as root. Rerun this script as $HUBOT user to install hubot-slack adapter
+    [ -d "$HUBOT_HOME" ] || mkdir -p "$HUBOT_HOME"
+    chown "${HUBOT_UID}:$HUBOT_GID" "$HUBOT_HOME"
+    chmod a+rx "$this_script"
+    sudo --login --user="${hubot['user']}" --set-home "$this_script" "$config_entry"
+
+elif [ "$1" = "$config_entry" ]; then
+    cd ~/
+    pwd
+    printf '\n    prepare and install hubot specific content for %s\n' "$(< "$info" )"
+    yo hubot --adapter=slack \
+             --owner="Bob Ballantyne" \
+             --license="MIT" \
+             --name="Hubot" \
+             --description="fun stuff" \
+             --defaults
+
+#    npm install coffee-script@1.12.6 hubot-slack --save
+    npm install hubot-slack --save
+fi
+
+#show log if there was an error
+if [ -e npm-debug.log ]; then
+    echo '---npm-debug.log-------------------------------------------------------------------'
+    cat npm-debug.log
+    echo '-----------------------------------------------------------------------------------'
+fi

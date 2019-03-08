@@ -1,4 +1,4 @@
-# hubot
+# hearstat/hubot-slack
 Hubot running on [Alpine](https://hub.docker.com/_/alpine/) with the [Slack Adapter](https://github.com/slackhq/hubot-slack).
 
 # Build Info

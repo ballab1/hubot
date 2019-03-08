@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd "${HUBOT_HOME}"
+crf.fixupDirectory "${HUBOT_HOME}" "${HUBOT_UID}"
+chmod a+rx bin/*

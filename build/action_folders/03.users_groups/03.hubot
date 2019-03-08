@@ -1,0 +1,10 @@
+#!/bin/bash
+
+declare -A hubot=(
+    ['user']=${HUBOT_USER:-hubot}
+    ['uid']="${HUBOT_UID:-$(hubot.UID "${HUBOT_USER:-}")}"
+    ['group']=${HUBOT_GROUP:-hubot}
+    ['gid']="${HUBOT_GID:-$(hubot.GID "${HUBOT_GROUP:-}")}"
+    ['shell']=/bin/bash
+    ['home']="${HUBOT_HOME:-/usr/local/hubot}"
+)

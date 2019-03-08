@@ -1,0 +1,23 @@
+#!/bin/bash
+
+printf '\n    %s\n' 'prepare and install NodeJS stuff'
+
+#declare -ra NPM_PKGS=( yo generator-hubot node-inspector )
+declare -ra NPM_PKGS=( yo generator-hubot )
+
+
+mkdir -p "$HUBOT_HOME"
+cd "$HUBOT_HOME"
+
+# prevent:  "Error: EACCES, permission denied '/root/.config/configstore/insight-yo.json'"
+#           https://github.com/keystonejs/keystone/issues/1566
+mkdir -p /root/.config/configstore
+chmod g+rwx /root /root/.config /root/.config/configstore 
+    
+npm install --global "${NPM_PKGS[@]}"
+
+if [ -e npm-debug.log ]; then
+    echo '---npm-debug.log-------------------------------------------------------------------'
+    cat npm-debug.log
+    echo '-----------------------------------------------------------------------------------'
+fi
