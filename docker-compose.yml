@@ -25,6 +25,7 @@ services:
                 container.git.url: $CONTAINER_GIT_URL
                 container.origin: $CONTAINER_ORIGIN
                 container.original.name: hubot
+                container.parent: $CONTAINER_PARENT
                 version.cbf: $CBF_VERSION
         container_name: hubot
         environment:
