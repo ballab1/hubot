@@ -31,35 +31,5 @@ services:
         environment:
             DEBUG_TRACE: ${DEBUG_TRACE:-0}
             HUBOT_BOT_NAME: hubot
-#            HUBOT_GITHUB_REPOS_MAP: '{"git":["ballab1/alpinefull","ballab1/bin","ballab1/DBMS-backup","ballab1/hubot","ballab1/jenkins","ballab1/jenkins-files","ballab1/kafka-i386","ballab1/mysql","ballab1/nagios","ballab1/nginx","ballab1/phpmyadmin","ballab1/prod","ballab1/update-check","ballab1/UptimePipeline","ballab1/webhooks","ballab1/zenphoto"]}'
-#            HUBOT_GITHUB_TOKEN_FILE: /run/secrets/github.token
-#            HUBOT_GITHUB_WEBHOOK_SECRET_FILE: /run/secrets/hubot_github_webhook_secret
-            HUBOT_SLACK_TOKEN_FILE: /run/secrets/slack.token
-            SUPERVISORD_PASS_FILE: /run/secrets/supervisord.pwd
-            SUPERVISORD_USER: $CFG_USER
         hostname: hubot
         image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/hubot:${CONTAINER_TAG:-latest}
-        logging:
-            driver: json-file
-            options:
-                max-file: "3"
-                max-size: "10m"
-        ports:
-            - 5858:5858
-            - 8081:8080
-            - 8123:8123
-        secrets:
-            - supervisord.pwd
-            - slack.token
-        volumes:
-            - ./vols/redis:/var/lib/redis
-            - ./vols/log:/var/log
-            - ./vols/conf:/opt/hubot
-
-secrets:
-   supervisord.pwd:
-     file: ~/.inf/secrets/bobb.password
-   github.token:
-     file: ~/.inf/secrets/hubot_token.github
-   slack.token:
-     file: ~/.inf/secrets/hubot_token.slack
