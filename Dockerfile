@@ -21,8 +21,8 @@ ARG HUBOT_HOME=/usr/local/hubot
 # build content
 RUN set -o verbose \
     && chmod u+rwx /tmp/build.sh \
-    && /tmp/build.sh "$CONTAINER_NAME" "$DEBUG_TRACE"
-RUN [ $DEBUG_TRACE != 0 ] || rm -rf /tmp/* 
+    && /tmp/build.sh "$CONTAINER_NAME" "$DEBUG_TRACE" \
+    && ([ "$DEBUG_TRACE" != 0 ] || rm -rf /tmp/*) 
 
 
 # hubot app port: Exposing node-inspector
