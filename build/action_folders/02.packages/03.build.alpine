@@ -1,17 +1,17 @@
 # build Packages
 
-declare -a OPTS=( '--virtual' '.buildDependencies' )
-declare -a PKGS=( build-base
-                  expat-dev
-                  file
+declare -a BUILD=( build-base
+                   expat-dev
+                   nodejs-dev
+                   g++
+                   gcc-objc
+                   libtool
+                   make
+                  )
+declare -a PKGS=( file
                   git
                   gnupg
                   gnutls-utils
-                  nodejs-dev
-                  g++
-                  gcc-objc
                   libc6-compat
-                  libtool
-                  make
                   tar )
 
