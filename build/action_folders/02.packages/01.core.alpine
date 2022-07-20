@@ -2,5 +2,5 @@
 
 declare -a PKGS=( imagemagick
                   nodejs
-                  nodejs-npm
+                  npm
                   sudo )
