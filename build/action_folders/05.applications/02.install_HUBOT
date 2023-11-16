@@ -37,6 +37,8 @@ elif [ "$1" = "$config_entry" ]; then
     npm install hubot-slack --save
 fi
 
+# npm audit fix --force
+
 #show log if there was an error
 if [ -e npm-debug.log ]; then
     echo '---npm-debug.log-------------------------------------------------------------------'
